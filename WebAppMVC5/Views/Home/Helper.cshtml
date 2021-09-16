@@ -1,0 +1,59 @@
+﻿@model WebAppMVC5.Models.EF.MailInfo
+
+@*Tại đây chúng ta sẽ thực hành về Helper*@
+
+@{
+    ViewBag.Title = "Helper";
+}
+
+<h2>Helper</h2>
+
+@*
+    linkText: Đoạn chữ hiển thị ra màn hình
+    actionName: Tên của Action
+    controllerName: Tên của controller chứ action (nếu action khác với controller ta dùng đẻ gọi file html này thì ta khai báo)
+    routeValues: Tập các tham số của action
+    htmlAttributes: Là danh sách các thuộc tính của thẻ đó
+*@
+
+@*Sử dụng ActionLink để sinh liên kết*@
+@*TH1: Truyền vào linkText và ActionName*@
+@Html.ActionLink("Giới thiệu", "About")
+
+@*TH2: Truyền vào linkText, ActionName và ContrllerName*@
+@Html.ActionLink("Giới thiệu", "About", "Home")
+
+@*TH3: Truyền vào linkText, ActionName, routeValues và htmlAttributes*@
+@Html.ActionLink("Giới thiệu", "About", new { id = "10" }, htmlAttributes: new { @class = "btn btn-success btn-sm" })
+
+@*TH3: Truyền vào linkText, ActionName, controllerName, routeValues và htmlAttributes*@
+@Html.ActionLink("Giới thiệu", "About", "Home", new { id = "10" }, htmlAttributes: new { @class = "btn btn-success btn-sm" })
+
+@*Xây dựng 1 Form sử dụng Helper thông qua Model*@
+@using (Html.BeginForm("Index", "SendMail", FormMethod.Post))
+{
+    <div class="card">
+        <div class="card-header">
+            <h3>Gửi mail</h3>
+        </div>
+        <div class="card-body">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="fw-bold">Email người nhận</label>
+                @*@Html.TextBoxFor(model => model.To, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.To, ViewBag.MailInfos as SelectList, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label class="fw-bold">Chủ đề</label>
+                @Html.TextBoxFor(model => model.Subject, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label class="fw-bold">Nội dung</label>
+                @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "form-control", @rows = "15" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+}

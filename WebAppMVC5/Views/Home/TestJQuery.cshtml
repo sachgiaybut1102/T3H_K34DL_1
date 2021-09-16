@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "TestJQuery";
+}
+
+<h2>TestJQuery</h2>
+
+<button id="btn">Say hello</button>
+<button id="btn-fadeIn">Fade In</button>
+<button id="btn-fadeOut">Fade Out</button>
+<button id="btn-show">Show</button>
+<button id="btn-hide">Hide</button>
+<button id="btn-toggle">Toggle</button>
+<button id="btn-slideUp">Slide Up</button>
+<button id="btn-slideDown">Slide Down</button>
+<div id="main">
+
+</div>
+
+<img id="img" style="width:300px;height:240px" src="http://thaunguyen.com/blog/wp-content/uploads/2018/07/spring.jpg" />
+
+@section scripts{
+    <script>
+        $(function () {
+            $('#btn').click(function () {
+                //Sử dụng hàm .html để đọc/ghi nội dung thẻ
+                $('#main').html("Hello students T3H, have a good day :D");
+
+                //thay đổi value attribute của element
+                $('#img').attr('src', 'https://lh3.googleusercontent.com/proxy/-trwtKk_Ux87J6BACwiC8P7pgAYGIa91QpU-TWY-lhC153NzVD7sMOC_7GvRge5fMZicULMFg7AGuJNw2KknlQnMM3_MHORW76oEqes6lNQIcs1CwA');
+
+                //thay đổi css
+                $('#img').css('border-radius', '50%');
+            });
+
+            $('#btn-fadeIn').click(function () {
+                $('#img').fadeIn();
+            });
+
+            $('#btn-fadeOut').click(function () {
+                $('#img').fadeOut();
+            });
+
+            //
+            $('#btn-show').click(function () {
+                $('#img').show();
+            });
+            $('#btn-hide').click(function () {
+                $('#img').hide();
+            });
+
+            $('#btn-toggle').click(function () {
+                $('#img').toggle();
+            });
+
+            //
+            $('#btn-slideUp').click(function () {
+                $('#img').slideUp();
+            });
+
+            $('#btn-slideDown').click(function () {
+                $('#img').slideDown();
+            });
+
+        })
+    </script>
+}

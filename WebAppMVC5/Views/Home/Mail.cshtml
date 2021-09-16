@@ -1,0 +1,35 @@
+﻿@*Thêm thư viện để sử dụng được Object Model*@
+@using WebAppMVC5.Models.EF
+
+@*Định nghĩa cho Model*@
+@model List<MailInfo>
+
+@{
+    ViewBag.Title = "Mail";
+}
+
+<h2>
+
+</h2>
+
+<table class="table table-sm table-hover table-striped">
+    <thead>
+        <tr>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Để sử dụng được code C# chúng ta sử dụng từ khóa @ trước các keyword hoặc các biến hoặc Model,,,,*@
+        @foreach (var mail in Model)
+        {
+            <tr>
+                <td>@mail.To</td>
+                <td>@mail.Subject</td>
+                <td>@mail.Note</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+
+<div class="d-flex flex-row-reverse">
+    <label>Keyword:</label>
+    <input id="keyword" name="keyword" class="form-control" placeholder="Nhập từ khóa cần tìm" value="@ViewBag.Keyword" autofocus />
+    @*<label>Page count:</label>
+        <input id="pageCount" name="pageCount" class="form-control" value="@ViewBag.PageCount" readonly />
+        <label>Page size:</label>
+        <input id="pageSize" name="pageSize" class="form-control" value="@ViewBag.PageSize" />
+        <label>Page number:</label>
+        <input id="pageNumber" name="pageNumber" class="form-control" value="@ViewBag.PageNumber" />*@   
+    <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
+</div>
+
+
+<div id="data">
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            loadData();
+
+            $('#btn-search').click(function () {
+                loadData();
+            });
+
+            $('body').on('click', '.pagination li a', function () {
+                console.log($(this).text());
+                loadData($(this).text());
+            });
+        });
+
+        function loadData(pageNumber) {
+            $.ajax({
+                type: 'get',
+                url: '/Categories/GetViewTableInfo',
+                data: {
+                    keyword: $('#keyword').val(),
+                    pageNumber: pageNumber,
+                    pageSize: 10
+                },
+                success: function (response) {
+                    $('#data').html(response);
+                    $('.pagination li a').attr('href', '#');
+                    console.log($('.pagination li a'));
+                }
+            })
+        }
+    </script>
+}
