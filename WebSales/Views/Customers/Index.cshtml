@@ -1,0 +1,76 @@
+﻿@using PagedList
+
+@model IPagedList<WebSales.Models.EF.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card shadow">
+    <div class="card-body">
+        <h2>Sản phẩm</h2>
+
+        @Html.Partial("IndexParitalView\\CreateAndFind")
+        <table class="table">
+            <tr>
+                <th>
+                    Tên tài khoản
+                </th>
+                <th>
+                    Mật khẩu
+                </th>
+                <th>
+                    Họ tên
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+
+                <th>
+                    Ảnh đại diện
+                </th>
+                <th>
+                    Tình trạng
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Photo)
+                    </td>
+                    <td>
+                        @{
+                            string classCss = (bool)item.Activated ? "btn-success" : "btn-danger";
+                            string content = (bool)item.Activated ? "Đã kích hoạt" : "Chưa kích hoạt";
+                        }
+                        <button class="btn btn-block btn-sm @classCss border-dark">@content</button>
+                    </td>
+                    <td class="text-nowrap" width="1px">
+                        @Html.Partial("IndexParitalView\\TableFeature", item.ID)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        @Html.Partial("IndexParitalView\\PagedList", Model)
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}

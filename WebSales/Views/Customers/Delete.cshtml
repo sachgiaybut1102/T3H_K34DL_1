@@ -1,0 +1,75 @@
+﻿@model WebSales.Models.EF.Customer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="card container shadow col-md-6 col-12">
+    <div class="card-body">
+        <h2>Xóa</h2>
+        <h3>Bạn có chắc muốn xóa?</h3>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Khách hàng</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Tên tài khoản</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Mật khẩu</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Họ và tên</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Email</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.EMail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.EMail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Ảnh đại diện</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group text-right">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Xóa" class="btn btn-danger border-dark" />
+                        @Html.ActionLink("Quay lại", "Index", null, htmlAttributes: new { @class = "btn btn-default border-dark" })
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

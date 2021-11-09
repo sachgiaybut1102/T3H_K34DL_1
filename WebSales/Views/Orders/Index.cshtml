@@ -1,0 +1,68 @@
+﻿@using PagedList
+
+@model IPagedList<WebSales.Models.EF.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="card shadow">
+    <div class="card-body">
+        <h2>Hóa đơn</h2>
+
+        @Html.Partial("IndexParitalView\\CreateAndFind")
+        <table class="table">
+            <tr>
+                <th>
+                    Tên tài khoản mua hàng
+                </th>
+                <th>
+                    Ngày mua
+                </th>
+                <th>
+                    Địa chỉ mua
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+
+                <th>
+                    Chú thích
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ID)
+                    </td>
+                    <td>
+                        @item.OrderDate.Value.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td class="text-nowrap" width="1px">
+                        @Html.Partial("IndexParitalView\\TableFeature", item.ID)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        @Html.Partial("IndexParitalView\\PagedList", Model)
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
